@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { HeaderInterceptor } from './services/header-interceptor.service'
 
 @NgModule({
     declarations: [AppComponent],

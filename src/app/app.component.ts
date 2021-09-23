@@ -8,6 +8,7 @@ import { CardsService } from './services/cards.service'
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+    title = 'champ-draft'
     constructor(private cardsService: CardsService) {}
 
     private input?: Card[]
