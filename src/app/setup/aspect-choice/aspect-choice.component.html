@@ -1,0 +1,26 @@
+<h3>Choose your aspects</h3>
+
+  <section class="example-section">
+    <span class="example-list-section">
+      <mat-checkbox class="example-margin"
+                    [checked]="allComplete"
+                    [color]="aspectChoices.color"
+                    [indeterminate]="someComplete()"
+                    (change)="setAll($event.checked)">
+        {{aspectChoices.name}}
+      </mat-checkbox>
+    </span>
+    <span class="example-list-section">
+      <ul>
+        <li *ngFor="let aspect of aspectChoices.aspect">
+          <mat-checkbox [(ngModel)]="aspect.completed"
+                        [color]="aspect.color"
+                        (ngModelChange)="updateAllComplete()">
+            {{aspect.name | titlecase}}
+          </mat-checkbox>
+        </li>
+      </ul>
+    </span>
+  </section>
+
+  <button mat-button (click)="applySettings()" [color]='"primary"'>Print checkbox state</button>
