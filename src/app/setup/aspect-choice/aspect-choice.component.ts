@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { FactionCode } from 'src/app/models/card.model'
+import { CardsService } from 'src/app/services/cards.service'
 
 @Component({
     selector: 'app-aspect-choice',
@@ -7,7 +8,7 @@ import { FactionCode } from 'src/app/models/card.model'
     styleUrls: ['./aspect-choice.component.scss']
 })
 export class AspectChoiceComponent {
-    constructor() {}
+    constructor(private _cardsService: CardsService) {}
 
     aspectChoices = {
         name: 'All Aspects',
@@ -62,7 +63,8 @@ export class AspectChoiceComponent {
                 chosenAspects.push(a.name)
             }
         })
-        console.log('chosenAspects :>> ', chosenAspects)
         localStorage.setItem('chosenAspects', chosenAspects.toString())
+
+        this._cardsService.setDeckbuildCards()
     }
 }
