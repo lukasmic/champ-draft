@@ -1,0 +1,27 @@
+
+<mat-sidenav-container>
+    <mat-sidenav #choiceList opened position="end" mode="side">
+        <mat-nav-list>
+            <a mat-list-item *ngFor="let selectedChoice of selectedChoices">{{selectedChoice.name}}</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    
+<mat-card *ngFor="let choice of presentedChoices; index as i" 
+    [ngClass]="{
+        'protectionCardChoice': choice.faction_name === 'Protection',
+        'leadershipCardChoice': choice.faction_name === 'Leadership',
+        'justiceCardChoice': choice.faction_name === 'Justice',
+        'aggressionCardChoice': choice.faction_name === 'Aggression',
+        'basicCardChoice': choice.faction_name === 'Basic'
+    }">
+    <mat-card-header>
+        <mat-card-title>{{choice.name}}</mat-card-title>
+        <mat-card-subtitle><b>{{choice.subname}}</b></mat-card-subtitle>
+        <mat-card-subtitle>{{choice.faction_name}} {{choice.type_name}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content [innerHTML]="choice.text">
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="selectChoiceButton" mat-button [color]='"primary"' (click)="selectChoice(choice)">Take this card</button>
+    </mat-card-actions>
+</mat-card>

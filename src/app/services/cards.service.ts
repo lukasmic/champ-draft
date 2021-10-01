@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 import { Card, FactionCode } from '../models/card.model'
 
@@ -12,8 +13,15 @@ export class CardsService {
     url = environment.url
     draftPool: Card[] = []
 
+    /**
+     * Get all available cards and filter out duplicates
+     */
     public getAll(): Observable<Card[]> {
-        return this.httpClient.get<any>(this.url + 'public/cards/')
+        return this.httpClient
+            .get<Card[]>(this.url + 'public/cards/')
+            .pipe(
+                map((cards) => cards.filter((card) => !card.duplicate_of_code))
+            )
     }
 
     public setDeckbuildCards(): void {
@@ -32,7 +40,8 @@ export class CardsService {
                         card.faction_code != FactionCode.Hero &&
                         cardTypes?.includes(card.faction_code)
                 )
-                .map((filteredCard) => this.draftPool.push(filteredCard))
+                .map((filteredCard) => this.draftPool.push(<Card>filteredCard))
         )
+        console.log('this.draftPool :>> ', this.draftPool)
     }
 }

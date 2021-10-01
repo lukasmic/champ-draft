@@ -1,1 +1,17 @@
+
+
+<mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">Basic Champions draft</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [(opened)]="opened" >
+        <mat-nav-list>
+            <a mat-list-item (click)="sidenav.toggle()" routerLink="/setup">Setup</a>
+            <a mat-list-item (click)="sidenav.toggle()" routerLink="/draft">Draft</a>
+        </mat-nav-list>
+    </mat-sidenav>
+<!-- </mat-sidenav-container>  // Doesnt work with this. wtf -->
+
 <router-outlet></router-outlet>

@@ -1,0 +1,40 @@
+mat-card {
+    outline: solid black;
+    margin: 10px 10px;
+    display: inline-block;
+    width: 220px;
+
+    word-wrap: break-word;
+}
+
+mat-card-content {
+    outline: solid 2px grey;
+    padding: 10px;
+}
+
+.selectedChoices {
+    display: inline-block;
+}
+
+.selectChoiceButton {
+}
+
+.protectionCardChoice {
+    background-color: lightgreen;
+}
+
+.leadershipCardChoice {
+    background-color: lightskyblue;
+}
+
+.justiceCardChoice {
+    background-color: yellow;
+}
+
+.aggressionCardChoice {
+    background-color: lightcoral;
+}
+
+.basicCardChoice {
+    background-color: lightgray;
+}
