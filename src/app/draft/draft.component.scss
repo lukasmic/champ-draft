@@ -12,6 +12,10 @@ mat-card-content {
     padding: 10px;
 }
 
+.mat-card-header-text {
+    margin-left: 0px;
+}
+
 .selectedChoices {
     display: inline-block;
 }
@@ -19,22 +23,15 @@ mat-card-content {
 .selectChoiceButton {
 }
 
-.protectionCardChoice {
-    background-color: lightgreen;
+.resourceIcon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: 15px;
+    padding: 10px 0;
 }
 
-.leadershipCardChoice {
-    background-color: lightskyblue;
-}
-
-.justiceCardChoice {
-    background-color: yellow;
-}
-
-.aggressionCardChoice {
-    background-color: lightcoral;
-}
-
-.basicCardChoice {
-    background-color: lightgray;
+.resourceIcon.resourceIconFist {
+    width: 20px;
+    height: 16px;
 }

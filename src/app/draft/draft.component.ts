@@ -46,15 +46,30 @@ export class DraftComponent implements OnInit {
                     ]
                 )
             }
+            this.presentedChoices[0]
         })
     }
 
     selectChoice(card: Card): void {
         this.selectedChoices.push(card)
+        this.selectedChoices.sort((a, b) => {
+            if (a.faction_name.toString() != b.faction_name.toString()) {
+                if (a.faction_name.toString() > b.faction_name.toString()) {
+                    return 1
+                }
+                return -1
+            }
+
+            return a.type_name > b.type_name ? 1 : -1
+        })
         this.presentNewChoices()
     }
 
     resetInvalidChoice(choiceNumber: number) {
         console.log('resetting choice number' + choiceNumber)
+    }
+
+    countToArray(i: number | undefined) {
+        return new Array(i ?? 0)
     }
 }

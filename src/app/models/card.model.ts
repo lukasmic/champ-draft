@@ -42,11 +42,11 @@ export interface Card {
     set_position?: number | null
     subname?: null | string
     cost?: number | null
-    resource_energy?: number | null
+    resource_energy?: number
     thwart_cost?: number | null
-    resource_physical?: number | null
-    resource_mental?: number | null
-    resource_wild?: number | null
+    resource_physical?: number
+    resource_mental?: number
+    resource_wild?: number
     attack_cost?: number | null
     duplicated_by?: string[]
     duplicate_of_code?: string

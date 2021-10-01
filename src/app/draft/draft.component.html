@@ -1,27 +1,44 @@
 
 <mat-sidenav-container>
     <mat-sidenav #choiceList opened position="end" mode="side">
-        <mat-nav-list>
-            <a mat-list-item *ngFor="let selectedChoice of selectedChoices">{{selectedChoice.name}}</a>
-        </mat-nav-list>
+        <mat-list>
+            <mat-list-item mat-list-item 
+                [ngClass]="{
+                    'protectionCard': selectedChoice.faction_name === 'Protection',
+                    'leadershipCard': selectedChoice.faction_name === 'Leadership',
+                    'justiceCard': selectedChoice.faction_name === 'Justice',
+                    'aggressionCard': selectedChoice.faction_name === 'Aggression',
+                    'basicCard': selectedChoice.faction_name === 'Basic'
+                }" 
+                *ngFor="let selectedChoice of selectedChoices">
+                <span>{{selectedChoice.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <img class="resourceIcon" *ngFor="let item of countToArray(selectedChoice.resource_energy)" src="../../assets/resourceIcons/energy.png" alt="">
+                <img class="resourceIcon" *ngFor="let item of countToArray(selectedChoice.resource_mental)" src="../../assets/resourceIcons/mental.png" alt="">
+                <img class="resourceIcon resourceIconFist" *ngFor="let item of countToArray(selectedChoice.resource_physical)" src="../../assets/resourceIcons/physical.png" alt="">
+                <img class="resourceIcon" *ngFor="let item of countToArray(selectedChoice.resource_wild)" src="../../assets/resourceIcons/wild.png" alt="">
+            </mat-list-item>
+        </mat-list>
     </mat-sidenav>
     
 <mat-card *ngFor="let choice of presentedChoices; index as i" 
     [ngClass]="{
-        'protectionCardChoice': choice.faction_name === 'Protection',
-        'leadershipCardChoice': choice.faction_name === 'Leadership',
-        'justiceCardChoice': choice.faction_name === 'Justice',
-        'aggressionCardChoice': choice.faction_name === 'Aggression',
-        'basicCardChoice': choice.faction_name === 'Basic'
+        'protectionCard': choice.faction_name === 'Protection',
+        'leadershipCard': choice.faction_name === 'Leadership',
+        'justiceCard': choice.faction_name === 'Justice',
+        'aggressionCard': choice.faction_name === 'Aggression',
+        'basicCard': choice.faction_name === 'Basic'
     }">
     <mat-card-header>
-        <mat-card-title>{{choice.name}}</mat-card-title>
+        <mat-card-title><i>{{choice.cost}}&nbsp;&nbsp;</i>{{choice.name}}</mat-card-title>
         <mat-card-subtitle><b>{{choice.subname}}</b></mat-card-subtitle>
         <mat-card-subtitle>{{choice.faction_name}} {{choice.type_name}}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content [innerHTML]="choice.text">
-    </mat-card-content>
+    <mat-card-content [innerHTML]="choice.real_text"></mat-card-content>
     <mat-card-actions>
         <button class="selectChoiceButton" mat-button [color]='"primary"' (click)="selectChoice(choice)">Take this card</button>
+        <img class="resourceIcon" *ngFor="let item of countToArray(choice.resource_energy)" src="../../assets/resourceIcons/energy.png" alt="">
+        <img class="resourceIcon" *ngFor="let item of countToArray(choice.resource_mental)" src="../../assets/resourceIcons/mental.png" alt="">
+        <img class="resourceIcon resourceIconFist" *ngFor="let item of countToArray(choice.resource_physical)" src="../../assets/resourceIcons/physical.png" alt="">
+        <img class="resourceIcon" *ngFor="let item of countToArray(choice.resource_wild)" src="../../assets/resourceIcons/wild.png" alt="">
     </mat-card-actions>
 </mat-card>
