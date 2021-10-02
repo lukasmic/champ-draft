@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Card, FactionCode } from '../models/card.model'
 import { CardsService } from '../services/cards.service'
+import { SettingsService } from '../services/settings.service'
 
 @Component({
     selector: 'app-draft',
@@ -8,7 +9,10 @@ import { CardsService } from '../services/cards.service'
     styleUrls: ['./draft.component.scss']
 })
 export class DraftComponent implements OnInit {
-    constructor(private _cardsService: CardsService) {}
+    constructor(
+        private _cardsService: CardsService,
+        private _settingsService: SettingsService
+    ) {}
 
     draftChoiceAmount = 3
     presentedChoices: Card[] = []
@@ -22,7 +26,7 @@ export class DraftComponent implements OnInit {
 
     presentNewChoices() {
         this.presentedChoices = []
-        var cardTypes = localStorage.getItem('chosenAspects')?.split(',')
+        var cardTypes = this._settingsService.chosenAspects
         !cardTypes?.includes('')
             ? cardTypes?.push('basic')
             : (cardTypes = ['basic'])

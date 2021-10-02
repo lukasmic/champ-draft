@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { FactionCode } from 'src/app/models/card.model'
-import { CardsService } from 'src/app/services/cards.service'
+import { SettingsService } from 'src/app/services/settings.service'
 
 @Component({
     selector: 'app-aspect-choice',
@@ -8,29 +8,37 @@ import { CardsService } from 'src/app/services/cards.service'
     styleUrls: ['./aspect-choice.component.scss']
 })
 export class AspectChoiceComponent {
-    constructor(private _cardsService: CardsService) {}
+    constructor(private _settingsService: SettingsService) {}
 
     aspectChoices = {
         name: 'All Aspects',
-        completed: false,
+        completed: this._settingsService.isAllAspectsSelected(),
         color: 'primary',
         aspect: [
             {
                 name: FactionCode.Aggression,
-                completed: false,
+                completed: this._settingsService.isAggressionSelected(),
                 color: 'primary'
             },
-            { name: FactionCode.Justice, completed: false, color: 'primary' },
+            {
+                name: FactionCode.Justice,
+                completed: this._settingsService.isJusticeSelected(),
+                color: 'primary'
+            },
             {
                 name: FactionCode.Leadership,
-                completed: false,
+                completed: this._settingsService.isLeadershipSelected(),
                 color: 'primary'
             },
-            { name: FactionCode.Protection, completed: false, color: 'primary' }
+            {
+                name: FactionCode.Protection,
+                completed: this._settingsService.isProtectionSelected(),
+                color: 'primary'
+            }
         ]
     }
 
-    allComplete: boolean = false
+    allComplete: boolean = this.aspectChoices.completed
 
     updateAllComplete() {
         this.allComplete =
@@ -65,6 +73,6 @@ export class AspectChoiceComponent {
         })
         localStorage.setItem('chosenAspects', chosenAspects.toString())
 
-        this._cardsService.setDeckbuildCards()
+        this._settingsService.chosenAspects = chosenAspects
     }
 }
