@@ -9,22 +9,25 @@ body {
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.protectionCard {
+.mat-mdc-card-header.protectionCard {
     background-color: lightgreen;
 }
 
-.leadershipCard {
+.mat-mdc-card-header.leadershipCard {
     background-color: lightskyblue;
 }
 
-.justiceCard {
+.mat-mdc-card-header.justiceCard {
     background-color: yellow;
 }
 
-.aggressionCard {
+.mat-mdc-card-header.aggressionCard {
     background-color: lightcoral;
 }
 
-.basicCard {
+.mat-mdc-card-header.basicCard {
     background-color: lightgray;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

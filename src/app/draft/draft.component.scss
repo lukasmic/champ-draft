@@ -7,6 +7,10 @@ mat-card {
     word-wrap: break-word;
 }
 
+mat-card-header {
+    padding-bottom: 1rem;
+}
+
 mat-card-content {
     outline: solid 2px grey;
     padding: 10px;
