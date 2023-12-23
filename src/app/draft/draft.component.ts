@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core'
-import { Card, FactionCode } from '../models/card.model'
-import { CardsService } from '../services/cards.service'
-import { SettingsService } from '../services/settings.service'
+import { Component, OnInit } from '@angular/core';
+import { Card, FactionCode } from '../models/card.model';
+import { CardsService } from '../services/cards.service';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
     selector: 'app-draft',
     templateUrl: './draft.component.html',
-    styleUrls: ['./draft.component.scss']
+    styleUrls: ['./draft.component.scss'],
 })
 export class DraftComponent implements OnInit {
     constructor(
@@ -14,22 +14,22 @@ export class DraftComponent implements OnInit {
         private _settingsService: SettingsService
     ) {}
 
-    draftChoiceAmount = 3
-    presentedChoices: Card[] = []
-    possibleChoices: Card[] = []
-    selectedChoices: Card[] = []
+    draftChoiceAmount = 3;
+    presentedChoices: Card[] = [];
+    possibleChoices: Card[] = [];
+    selectedChoices: Card[] = [];
 
     ngOnInit(): void {
-        this._cardsService.setDeckbuildCards()
-        this.presentNewChoices()
+        this._cardsService.setDeckbuildCards();
+        this.presentNewChoices();
     }
 
     presentNewChoices() {
-        this.presentedChoices = []
-        var cardTypes = this._settingsService.chosenAspects
+        this.presentedChoices = [];
+        var cardTypes = this._settingsService.chosenAspects;
         !cardTypes?.includes('')
             ? cardTypes?.push('basic')
-            : (cardTypes = ['basic'])
+            : (cardTypes = ['basic']);
 
         this._cardsService.getAll().subscribe((cards) => {
             this.possibleChoices = cards.filter(
@@ -37,7 +37,7 @@ export class DraftComponent implements OnInit {
                     card.faction_code != FactionCode.Campaign &&
                     card.faction_code != FactionCode.Hero &&
                     cardTypes?.includes(card.faction_code)
-            )
+            );
 
             for (
                 let choiceCount = 0;
@@ -48,32 +48,38 @@ export class DraftComponent implements OnInit {
                     this.possibleChoices[
                         Math.floor(Math.random() * this.possibleChoices.length)
                     ]
-                )
+                );
             }
-            this.presentedChoices[0]
-        })
+            this.presentedChoices[0];
+        });
     }
 
     selectChoice(card: Card): void {
-        this.selectedChoices.push(card)
+        this.selectedChoices.push(card);
         this.selectedChoices.sort((a, b) => {
-            if (a.faction_name.toString() != b.faction_name.toString()) {
-                if (a.faction_name.toString() > b.faction_name.toString()) {
-                    return 1
+            if (
+                (a.faction_name ?? '').toString() !=
+                (b.faction_name ?? '').toString()
+            ) {
+                if (
+                    (a.faction_name ?? '').toString() >
+                    (b.faction_name ?? '').toString()
+                ) {
+                    return 1;
                 }
-                return -1
+                return -1;
             }
 
-            return a.type_name > b.type_name ? 1 : -1
-        })
-        this.presentNewChoices()
+            return a.type_name > b.type_name ? 1 : -1;
+        });
+        this.presentNewChoices();
     }
 
     resetInvalidChoice(choiceNumber: number) {
-        console.log('resetting choice number' + choiceNumber)
+        console.log('resetting choice number' + choiceNumber);
     }
 
     countToArray(i: number | undefined) {
-        return new Array(i ?? 0)
+        return new Array(i ?? 0);
     }
 }

@@ -1,30 +1,34 @@
-import { Injectable } from '@angular/core'
-import { FactionCode } from '../models/card.model'
+import { Injectable } from '@angular/core';
+import { FactionCode } from '../models/card.model';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SettingsService {
     constructor() {}
 
     chosenAspects: string[] | undefined = localStorage
         .getItem('chosenAspects')
-        ?.split(',')
+        ?.split(',');
 
     isAggressionSelected(): boolean {
-        return this.chosenAspects?.includes(FactionCode.Aggression) ?? false
+        return this.chosenAspects?.includes(FactionCode.Aggression) ?? false;
     }
 
     isJusticeSelected(): boolean {
-        return this.chosenAspects?.includes(FactionCode.Justice) ?? false
+        return this.chosenAspects?.includes(FactionCode.Justice) ?? false;
     }
 
     isLeadershipSelected(): boolean {
-        return this.chosenAspects?.includes(FactionCode.Leadership) ?? false
+        return this.chosenAspects?.includes(FactionCode.Leadership) ?? false;
     }
 
     isProtectionSelected(): boolean {
-        return this.chosenAspects?.includes(FactionCode.Protection) ?? false
+        return this.chosenAspects?.includes(FactionCode.Protection) ?? false;
+    }
+
+    isPoolSelected(): boolean {
+        return this.chosenAspects?.includes(FactionCode.Pool) ?? false;
     }
 
     isAllAspectsSelected(): boolean {
@@ -32,7 +36,8 @@ export class SettingsService {
             this.isAggressionSelected() &&
             this.isJusticeSelected() &&
             this.isLeadershipSelected() &&
-            this.isProtectionSelected()
-        )
+            this.isProtectionSelected() &&
+            this.isPoolSelected()
+        );
     }
 }

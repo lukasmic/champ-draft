@@ -20,6 +20,7 @@
         'leadershipCard': choice.faction_name === 'Leadership',
         'justiceCard': choice.faction_name === 'Justice',
         'aggressionCard': choice.faction_name === 'Aggression',
+        'poolCard': choice.faction_name === '\'Pool',
         'basicCard': choice.faction_name === 'Basic'
     }">
     <mat-card-header [ngClass]="{
@@ -27,6 +28,7 @@
         'leadershipCard': choice.faction_name === 'Leadership',
         'justiceCard': choice.faction_name === 'Justice',
         'aggressionCard': choice.faction_name === 'Aggression',
+        'poolCard': choice.faction_name === '\'Pool',
         'basicCard': choice.faction_name === 'Basic'
     }" >
         <mat-card-title><i>{{choice.cost}}&nbsp;&nbsp;</i>{{choice.name}}</mat-card-title>
