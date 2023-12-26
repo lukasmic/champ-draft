@@ -24,13 +24,19 @@ export class CardsService {
             );
     }
 
-    public setDeckbuildCards(): void {
+    public setDeckbuildCards(): boolean {
         this.draftPool = [];
-
-        var cardTypes = localStorage.getItem('chosenAspects')?.split(',');
-        !cardTypes?.includes('')
-            ? cardTypes?.push('basic')
-            : (cardTypes = ['basic']);
+        var chosenAspectsString = localStorage.getItem('chosenAspects');
+        console.log('chosenAspectsString :>> ', chosenAspectsString);
+        var storedCardTypes = localStorage.getItem('chosenAspects');
+        if (!storedCardTypes) cardTypes = ['basic'];
+        else {
+            var cardTypes = localStorage.getItem('chosenAspects')?.split(',');
+            !cardTypes?.includes('')
+                ? cardTypes?.push('basic')
+                : (cardTypes = ['basic']);
+        }
+        console.log('cardTypes :>> ', cardTypes);
 
         this.getAll().subscribe((a) =>
             a
@@ -43,5 +49,6 @@ export class CardsService {
                 .map((filteredCard) => this.draftPool.push(<Card>filteredCard))
         );
         console.log('this.draftPool :>> ', this.draftPool);
+        return true;
     }
 }
